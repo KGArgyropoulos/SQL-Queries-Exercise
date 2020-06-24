@@ -3,16 +3,18 @@
 **Exercise 1**
 - Find ids from the customers that come from France and have made an order after 1998-07-02.
 
-select C_CUSTKEY as 'customer_key'
-from customer
-where C_NATIONKEY in(select N_NATIONKEY
-					from nation
-					where N_NAME="FRANCE"
-					and C_CUSTKEY in(select O_CUSTKEY
-									 from orders
-									 where O_ORDERDATE>'19980702'))
+select C_CUSTKEY as 'customer_key' \
+from customer \
+where C_NATIONKEY in(select N_NATIONKEY \
+					from nation \
+					where N_NAME="FRANCE" \
+					and C_CUSTKEY in(select O_CUSTKEY \
+									 from orders \
+									 where O_ORDERDATE>'19980702')) \
 
 **Exercise 2**
+-
+
 select S_NAME as 'supplier_name'
 from supplier
 where S_NATIONKEY in(select N_NATIONKEY
