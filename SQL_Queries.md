@@ -6,11 +6,11 @@
 select C_CUSTKEY as 'customer_key' \
 from customer \
 where C_NATIONKEY in(select N_NATIONKEY \
-					from nation \
-					where N_NAME="FRANCE" \
-					and C_CUSTKEY in(select O_CUSTKEY \
-									 from orders \
-									 where O_ORDERDATE>'19980702')) \
+*Tabspace**Tabspace**Tabspace**Tabspace**Tabspace*from nation \
+*Tabspace**Tabspace**Tabspace**Tabspace**Tabspace*where N_NAME="FRANCE" \
+*Tabspace**Tabspace**Tabspace**Tabspace**Tabspace*and C_CUSTKEY in(select O_CUSTKEY \
+*Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace*from orders \
+*Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace**Tabspace*where O_ORDERDATE>'19980702')) \
 
 **Exercise 2**
 -
