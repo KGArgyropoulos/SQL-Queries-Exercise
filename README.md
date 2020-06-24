@@ -3,7 +3,7 @@
 **For the entity-relationship diagram in the picture [schema.png], try to find the appropriate SQL queries**
 
 **Exercise 1**
-- Find ids from the customers that come from France and have made an order after 1998-07-02.
+- Find IDs from the customers who are French and have made an order after 1998-07-02.
 
 select C_CUSTKEY as 'customer_key' \
 from customer \
@@ -15,7 +15,7 @@ where C_NATIONKEY in(select N_NATIONKEY \
 									 where O_ORDERDATE>'19980702'))
 
 **Exercise 2**
-- Find the names of the ASIAN suppliers that have supplied European customers.
+- Find the names of the ASIAN suppliers who have supplied European customers.
 
 select S_NAME as 'supplier_name' \
 from supplier \
@@ -88,14 +88,14 @@ and C_CUSTKEY in(select O_CUSTKEY \
 				 where O_ORDERDATE<>'20141212')
 
 **Exercise 5**
-- Find the average supply cost(PS_SUPPLYCOST) from the region named "forest brown coral puf cream".
+- Find the average supply cost(PS_SUPPLYCOST) of the part named "yellow smoke firebrick chiffon rosy".
 
 select p_name,avg(PS_SUPPLYCOST) as 'avg_supplycost' \
 from part,partsupp \
 where P_PARTKEY=PS_PARTKEY and p_name="yellow smoke firebrick chiffon rosy"
 
 **Exercise 6**
-- Find the names and the phone numbers of the customers that have the same supplier in all of their orders.
+- Find the names and the phone numbers of the customers who have the same supplier in all of their orders.
 
 select C_NAME as customer_name,C_PHONE as customer_phone \
 from customer \
@@ -166,7 +166,6 @@ where not exists(select* from orders o \
 				    where o.O_ORDERKEY=L_ORDERKEY \
 				    and L_SUPPKEY=PS_SUPPKEY \
 		 		    and S_SUPPKEY=PS_SUPPKEY \
-
 		 		    and S_NATIONKEY=N_NATIONKEY \
 		 	    	and N_NAME!="GERMANY" )) \
 UNION \
