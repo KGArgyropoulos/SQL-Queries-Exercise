@@ -35,49 +35,54 @@ and S_SUPPKEY in(select L_SUPPKEY \
 																			  where R_NAME="EUROPE")))))
 
 **Exercise 3**
-select count(distinct L_SUPPKEY) as 'suppliers'
-from lineitem
-where L_RECEIPTDATE='19980721' and L_PARTKEY in(select PS_PARTKEY
-												from partsupp
-												where PS_PARTKEY in(select P_PARTKEY
-												from part
+- Find the number of the suppliers who delivered an order on (receiptdate=) 1998-07-21 and brand "brand#22".
+
+select count(distinct L_SUPPKEY) as 'suppliers' \
+from lineitem \
+where L_RECEIPTDATE='19980721' and L_PARTKEY in(select PS_PARTKEY \
+												from partsupp \
+												where PS_PARTKEY in(select P_PARTKEY \
+												from part \
 												where P_BRAND="brand#22"))
 
 **Exercise 4**
-select 'yes' as answer
-from customer
-where C_CUSTKEY in(select O_CUSTKEY
-					from orders
-					where O_ORDERKEY in(select L_ORDERKEY
-										from lineitem
-										where L_SUPPKEY in(select S_SUPPKEY
-															from supplier
-															where S_NATIONKEY in(select N_NATIONKEY
-																				 from nation
-																				 where N_NATIONKEY="GERMANY"))))
-and C_NATIONKEY in(select N_NATIONKEY
-				   from nation
-				   where N_NAME="FRANCE")
-and C_CUSTKEY in(select O_CUSTKEY
-				 from orders
-				 where O_ORDERDATE='20141212')
-UNION
-select 'no' as answer
-from customer
-where C_CUSTKEY in(select O_CUSTKEY
-					from orders
-					where O_ORDERKEY in(select L_ORDERKEY
-									    from lineitem
-										where L_SUPPKEY in(select S_SUPPKEY
-													       from supplier
-															where S_NATIONKEY in(select N_NATIONKEY
-																				from nation
-																				where N_NATIONKEY<>"GERMANY"))))
-and C_NATIONKEY in(select N_NATIONKEY
-				   from nation
-				   where N_NAME<>"FRANCE")
-and C_CUSTKEY in(select O_CUSTKEY
-				 from orders
+- Check (yes/no) if there is an order on 2014-12-12, from a French customer to a German supplier.
+- *No use of Flow Control Operators (if,case,etc)
+
+select 'yes' as answer \
+from customer \
+where C_CUSTKEY in(select O_CUSTKEY \
+					from orders \
+					where O_ORDERKEY in(select L_ORDERKEY \
+										from lineitem \
+										where L_SUPPKEY in(select S_SUPPKEY \
+															from supplier \
+															where S_NATIONKEY in(select N_NATIONKEY \
+																				 from nation \
+																				 where N_NATIONKEY="GERMANY")))) \
+and C_NATIONKEY in(select N_NATIONKEY \
+				   from nation \
+				   where N_NAME="FRANCE") \
+and C_CUSTKEY in(select O_CUSTKEY \
+				 from orders \
+				 where O_ORDERDATE='20141212') \
+UNION \
+select 'no' as answer \
+from customer \
+where C_CUSTKEY in(select O_CUSTKEY \
+					from orders \
+					where O_ORDERKEY in(select L_ORDERKEY \
+									    from lineitem \
+										where L_SUPPKEY in(select S_SUPPKEY \
+													       from supplier \
+															where S_NATIONKEY in(select N_NATIONKEY \
+																				from nation \
+																				where N_NATIONKEY<>"GERMANY")))) \
+and C_NATIONKEY in(select N_NATIONKEY \
+				   from nation \
+				   where N_NAME<>"FRANCE") \
+and C_CUSTKEY in(select O_CUSTKEY \
+				 from orders \
 				 where O_ORDERDATE<>'20141212')
 
 **Exercise 5**
